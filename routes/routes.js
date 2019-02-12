@@ -15,17 +15,17 @@ var appRouter = function (app) {
                 });
             }
             else{
+                var result = [];
+
                 content.forEach(element => {
                     if (element.name == req.query.cityName)
                     {
-                        if(!bool)
-                        {
-                            return res.send({
-                                element
-                            });
-                            bool = true;
-                        }
+                        result.push(element);
                     }
+                });
+
+                return res.send({
+                    result
                 });
             }
     });
@@ -54,7 +54,6 @@ fs.readFile("assets\\cities.json", 'utf8', function (err, data) {
         process.exit(1);
     }
     content = JSON.parse(data);
-    console.log("finishParsing");
 });
 
 module.exports = appRouter;
